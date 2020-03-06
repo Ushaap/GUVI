@@ -1,0 +1,14 @@
+const fi=a.filter((a)=>{return a.capital.length<=5})
+console.log(fi);
+
+
+var request= new XMLHttpRequest();
+request.open('GET','https://restcountries.eu/rest/v2/all',true);
+request.send();
+request.onload=function(){
+    var data=JSON.parse(this.response);
+	const fi=a.filter((a)=>{return a.capital.length<=5})
+	console.log(fi);
+
+request.send()}
+  

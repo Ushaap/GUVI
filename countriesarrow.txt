@@ -1,0 +1,4 @@
+const fi=a.filter((a)=>{return a.capital.length<=5})
+undefined
+console.log(fi);
+

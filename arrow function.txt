@@ -1,0 +1,31 @@
+const n=[1,2,4,5,6,7,9];
+const f=n.filter((n)=>{return n%2!==0})
+const t = f.reduce((currenttotal,f)=>{return f+currenttotal},0)
+console.log(t);  //odd even
+
+
+
+function titleCase(str) {
+  return str.toLowerCase().split(' ').map(function(word) {
+    return (word.charAt(0).toUpperCase() + word.slice(1));
+  }).join(' ');
+}
+titleCase("My name is Ushaa Palaniappan");   //titlecase string
+
+
+const arr=[{num: 1},{num: 2},{num:3},{num: 4},{num: 5}
+           ]
+const total= arr.reduce((currentTotal,item)=>{
+  return item.num+currentTotal
+},0)
+console.log(total)
+
+
+
+
+const array = [3,4, 6, 8, 12, 53, -17, 2, 5, 7, 31, 97, -1, 17];
+
+const Prime = num => (num > 2 && num % 2 == 0) ? false : num > 1;
+
+console.log(array.filter(Prime));
+

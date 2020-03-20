@@ -1,0 +1,55 @@
+<html>
+    <head>
+      <title>promise</title>
+        <script>
+          
+            
+             async function myCountry(){
+			 var countries = await fetch("https://restcountries.eu/rest/v2/all");
+			 var countryData=await countries.json();
+			 console.log(countryData);
+			 
+			 
+        const filteredItems = countryData.filter((item) => {
+          return item.name=="India";
+        });
+		
+        var code=filteredItems[0].alpha2Code;
+        var flag=filteredItems[0].flag;
+        var name=filteredItems[0].name;
+        document.getElementById("flag").src=flag;
+        document.getElementById("flag").style.width="500px"
+		
+		
+			 var weather= await fetch("http://api.openweathermap.org/data/2.5/weather?q="+ name + "&appid=4b8257af63d0f5bda3a3f065cac5a035");
+              var weatherdata=await weather.json();
+			  console.log(weatherdata);
+			  
+            var min=Number(JSON.stringify(weatherdata.main.temp_min))
+            var max=Number(JSON.stringify(weatherdata.main.temp_max))
+			var h=Number(JSON.stringify(weatherdata.main.humidity))
+            var p=Number(JSON.stringify(weatherdata.main.pressure))
+			document.getElementById("weather").innerHTML+= "City:" + weatherdata.name + "<br>"
+            document.getElementById("weather").innerHTML+= "Minimum Temp:" + k(min) + "C" + "<br>"
+            document.getElementById("weather").innerHTML+= "Maximum Temp:" + k(max) + "C" + "<br>"
+			 document.getElementById("weather").innerHTML+= "Humidity:" + h +  "<br>"
+            document.getElementById("weather").innerHTML+= "Pressure:" + p 
+            
+          
+    
+function k(kelvin)
+    {
+        return (kelvin-273).toFixed(2);
+    }
+    }
+	myCountry();
+    </script>
+    </head>
+
+    <body>
+<div id="country" align="center">
+    <p id="weather" ></p>
+    <img id="flag"></img>
+</div>
+    </body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<style>
+.signup {
+	text-align : centre;
+	color :black;
+}
+.container {
+  max-width: 500px;
+  margin: auto;
+margin-left: auto;
+    margin-right: auto;
+  width: 100%;
+  border: 9px solid green;
+  padding: 500px;
+  text-align : centre;
+align-items: center;
+}
+
+.registerbtn {
+  background-color: blue;
+  color: white;
+max-width: 500px;
+  text-align:centre
+}
+
+</style>
+<head>
+<title>MY DASHBOARD</title>
+</head>
+<body>
+<form >
+    <div class="container">
+	<table>
+    <h1>MY DASHBOARD!</h1>
+	<tr>
+    <td><label for="Product Name" class ="signup"><b>Product Name</b></label>
+    <input type="text" id="pdname"></td>
+    </tr>
+	<tr>
+    <td><label for="Quantity"><b>Quantity</b></label>
+    <input type="text" id="qty" placeholder="Enter Quantity" required></td>
+	</tr>
+    <tr>
+    <td><input type="submit" class = registerbtn value ="ShowCart" onclick="showData();return false;"  ></td>
+	<td><input type="submit" class = registerbtn value ="InsertCart" onclick="insertData();return false;"></td>
+	<td><input type="submit" class = registerbtn value ="Update" onclick="updateData();return false;" ></td>
+	<td><input type="submit" class = registerbtn value ="Delete" onclick="DeleteData();return false;" ></td>
+	</tr>
+	</table>
+	<table id="table" border="1px solid black">
+	<tr>
+		<td>PRODUCT</td>
+		<td>Quantity</td>
+	</tr>
+	</table>
+  </div>
+<script>
+function insertData(){
+var data={
+email: localStorage.getItem("email"),
+product: document.getElementById("pdname").value,
+quantity: document.getElementById("qty").value
+};
+
+fetch("http://localhost:3030/insert",{
+method:"POST",
+headers:{
+Accept:"application/json",
+"Content-Type":"application/json"
+},
+body:JSON.stringify(data)
+})
+.then(function(data){
+console.log(data);
+})
+.catch(function(error){
+console.log(error);
+})
+}
+async function showData(){
+
+
+var res= await fetch("http://localhost:3030/display", {
+        method: 'GET',
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        }
+
+    });
+
+var viewcart = await res.json();
+console.log(viewcart);
+viewcart.innerHTML="";
+    var trow = mycart.insertRow();
+    var hd1 = trow.insertCell(0);
+    hd1.innerHTML = "PRODUCT";
+    var hd2 = trow.insertCell(1);
+    hd2.innerHTML = "Quantity";
+    
+
+    for (i = 0; i < viewcart.length; i++) {
+        var row = mycart.insertRow();
+
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = viewcart[i].product;
+        var cell2 = row.insertCell(1);
+        cell2.innerHTML = viewcart[i].quantity;
+        ;
+
+
+
+
+
+       
+
+}
+}
+
+
+
+function updateData(){
+var data={
+email :localStorage.getItem("email"),
+product: document.getElementById("pdname").value,
+quantity: document.getElementById("qty").value
+};
+fetch("http://localhost:3030/update",{
+method:"put",
+headers:{
+Accept:"application/json",
+"Content-Type":"application/json"
+},
+body:JSON.stringify(data)
+})
+.then(function(data){
+console.log(data);
+})
+.catch(function(error){
+console.log(error);
+})
+}
+function DeleteData(){
+var data={
+email :localStorage.getItem("email"),
+product: document.getElementById("pdname").value,
+quantity: document.getElementById("qty").value
+};
+fetch("http://localhost:3030/delete",{
+method:"delete",
+headers:{
+Accept:"application/json",
+"Content-Type":"application/json"
+},
+body:JSON.stringify(data)
+})
+.then(function(data){
+console.log(data);
+})
+.catch(function(error){
+console.log(error);
+})
+}
+
+
+</script>
+  
+</form>
+</body>
+</html>-

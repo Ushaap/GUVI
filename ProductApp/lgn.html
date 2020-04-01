@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<style>
+.signup {
+	text-align : centre;
+	color :black;
+}
+.container {
+  max-width: 500px;
+  margin: auto;
+margin-left: auto;
+    margin-right: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+  text-align : centre;
+align-items: center;
+}
+
+.registerbtn {
+  background-color: blue;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  width: 30%;
+  opacity: 0.9;
+  text-align:centre
+}
+
+</style>
+<head>
+<title>SIGNIN</title>
+</head>
+<body>
+<form>
+    <div class="container">
+    <h1>Sign in!</h1>
+    <label for="Email" class ="signup"><b>Email</b></label>
+    <input type="email" id="email">
+    <br>
+    <label for="Password"><b>Password</b></label>
+    <input type="password" id="password" placeholder="Enter Password" required>
+    <br>
+    <input type="submit" class = registerbtn value ="Submit" onclick="signin();return false;">
+	  </div>
+
+  
+</form>
+<script>
+
+        async function signin() {
+
+    var data = {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value
+    };
+    //Login for registered
+    var resData = await fetch("http://localhost:3030/login", {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "content-Type": "application/json"
+
+        },
+        body: JSON.stringify(data)
+
+    })
+
+    var rData = await resData.json();
+    console.log(rData);
+    var vtoken = (rData.token);
+    console.log(vtoken);
+    //store the token in local storage
+
+    localStorage.setItem('token', vtoken);
+
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", vtoken);
+    myHeaders.append("Content-Type", "application/json");
+
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+    //get the decoded token for token verified users
+
+    var resData = await fetch("http://localhost:3030/dashboard", requestOptions)
+
+    var finData = await resData.json();
+
+
+    console.log(finData);
+    alert("user login verified")
+    localStorage.setItem("email", finData.email)
+    localStorage.setItem("userid",rData.userid)
+    location.replace("dashboard.html");
+
+}
+</script>
+</body>
+</html>

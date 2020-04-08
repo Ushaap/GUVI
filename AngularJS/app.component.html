@@ -1,0 +1,32 @@
+
+<!--
+<h1>Hello {{title}}</h1>
+
+<button (click)="sendData()">Click</button>
+<app-home></app-home>
+
+<div [ngClass] = "{'boxColor':colourchange,'boxColor2':!colourchange}">Hello World</div>
+
+<div *ngIf =" colourchange==false">
+ This is Blue
+</div>
+<ul>
+  <li *ngFor ="let food of myFavFood">
+    <span [ngClass]="{'boxColor2':food.name==='PavBhaji'}">{{food.name}}</span>
+  </li>
+  </ul>
+
+
+<input type ="text" [(ngModel)] ="user">
+{{user}}
+-->
+
+<div class="container mb-5 mt-5">
+  <div class="pricing card-deck flex-column flex-md-row mb-3">
+<app-starter></app-starter>
+ <app-professional></app-professional>
+ 
+<app-business></app-business>
+<app-enterprise></app-enterprise>
+</div>
+</div>

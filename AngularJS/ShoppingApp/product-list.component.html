@@ -1,0 +1,16 @@
+<button (click) ="addproduct()">Create</button>
+<table>
+    <td>ID</td>
+    <td>NAME</td>
+    <td>PRICE</td>
+    <td>QUANTITY</td>
+    <td>CATEGORY</td>
+    <tr *ngFor="let prod of listData">
+        <td>{{prod.id}}</td>
+        <td>{{prod.name}}</td>
+        <td>{{prod.price}}</td>
+        <td>{{prod.quantity}}</td>
+        <td>{{prod.prodcategory}}</td>
+        </tr>
+</table>
+   

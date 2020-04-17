@@ -1,0 +1,25 @@
+
+
+<!-- Free Tier -->
+<div class="card mb-5 mb-lg-0">
+    <div class="card-body">
+        <h5 class="card-title text-muted text-uppercase text-center">{{cardData.name}}</h5>
+        <h6 class="card-price text-center">$0<span class="period">{{cardData.period}}</span></h6>
+        <hr>
+        <ul class="fa-ul">
+            <li [hidden]="!option.isStrong" *ngFor="let option of cardData.options"
+                [ngClass]="{'text-muted':option.disable}"><span class="fa-li"><i
+                        [ngClass]="{'fa fa-check':!option.disable}"></i><i
+                        [ngClass]="{'fa fa-times':option.disable}"></i></span><strong
+                    *ngIf="option.isStrong">{{option.name}}</strong></li>
+            <li [hidden]="option.isStrong" *ngFor="let option of cardData.options"
+                [ngClass]="{'text-muted':option.disable}"><span class="fa-li"><i
+                        [ngClass]="{'fa fa-check':!option.disable}"></i><i
+                        [ngClass]="{'fa fa-times':option.disable}"></i></span>{{option.name}}</li>
+        </ul>
+        <a href="#" class="btn btn-block btn-primary text-uppercase">Subscribe</a>
+    </div>
+
+</div>
+
+
